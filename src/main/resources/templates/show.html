@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="base :: headstuff"></head>
+<body>
+<div th:replace="base :: navbar"></div>
+<div class="container bg-light ">
+    <div class="my-5 "></div>
+
+    <div class="my-4 py-5" align="center">
+
+        <table class="table">
+            <tr class="text-dark">
+                <th class="pr-3">Content</th>
+                <th class="pr-3">Sent By</th>
+                <th class="pr-3">Date</th>
+            </tr>
+            <tr>
+                <td class="pr-4" th:text="${cafe.itemName}"></td>
+                <td class="pr-3" th:text="${cafe.price}"></td>
+                <td class="pr-3" th:text="${cafe.description}"></td>
+
+            </tr>
+        </table>
+        <br>
+
+        <button class="btn btn-success"><a class="text-white" href="/add">Add a
+            Message</a></button>
+
+        <span th:if="${cafe.user.id == user_id}">
+        <button class="btn btn-success" sec:authorize="isAuthenticated()">
+            <a class="text-white" th:href="@{/update/{id}(id=${cafe.id})}">
+                Update Post</a>
+        </button>
+        </span>
+
+
+    </div></div>
+
+<footer th:replace="base :: footer"></footer>
+</body>
+</html>

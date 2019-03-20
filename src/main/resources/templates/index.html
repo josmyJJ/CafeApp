@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="base :: headstuff"></head>
+<body>
+<nav th:replace="base :: navbar"></nav>
+<div class="container">
+    <div sec:authorize="isAuthenticated()">
+        Logged user: <span sec:authentication="name">The value of the "name"
+        property of the authentication object should appear here.</span><br/>
+        Roles:
+        <span sec:authentication="principal.authorities">[USER, ADMIN]
+        </span><br/><br/>
+    </div>
+    <h1>Star Cafe</h1>
+    <h2>Please take a look at our menu</h2>
+    <div class="my-4 py-5" align="center">
+        <table class="table">
+            <!--<h2>Insecure Page</h2>-->
+            <!--<a href="/secure">Secure Page</a>-->
+            <tr class="text-dark">
+                <th class="pr-3">Menu</th>
+                <th class="pr-3">Price</th>
+                <th class="pr-3">Description</th>
+                <th class="pr-3">Picture</th>
+                <th class="pr-3"></th>
+                <th></th>
+            </tr>
+            <tr th:each="cafe : ${cafes}" >
+                <td class="pr-4" th:text="${cafe.itemName}"></td>
+                <td class="pr-3" th:text="${cafe.price}"></td>
+                <td class="pr-3" th:text="${cafe.description}"></td>
+
+                <td class="pr-3"  th:if="${cafe.image} != null">
+                    <img class=" daycare-img" style="width: 100px;"
+                         th:src="${cafe.image}">
+                    </section></td>
+
+                <div sec:authorize="hasAuthority('ADMIN')">
+                    <!-- HOW TO HIDE THE SECTION, THIS CODE NOT WORKING -->
+                    <td>
+                        <!--<a class="pr-3"-->
+                           <!--th:href="@{/update/{id}(id=${cafe.id})}">Update-->
+                        <!--</a>- -->
+                        <a class="pr-3"
+                                th:href="@{/detail/{id}(id=${cafe.id})}">
+                        Details</a>
+                    </td>
+                </div>
+
+                <div sec:authorize="hasAuthority('USER')">
+                    <td>
+                        <a class="pr-3 text-info"
+                           th:href="@{/detail/{id}(id=${cafe.id})}">Details</a>
+                    </td>
+                </div>
+            </tr>
+        </table>
+        <br>
+    </div>
+</div>
+<nav th:replace="base :: footer"></nav>
+<th:block th:replace="base :: jslinks"></th:block>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head th:replace="base :: headstuff"></head>
+<body>
+<div th:replace="base :: navbar"></div>
+<div class="container">
+    <div class="space"></div>
+    <div class="form">
+        <form action="#"
+              th:action="@{/process}"
+              th:object="${cafe}"
+              method="post" enctype="multipart/form-data">
+
+            <input type="hidden" th:field="*{id}" />
+
+            Item Name: <input type="text" th:field="*{itemName}"
+                              placeholder="Type the item name"/>
+            <span class="text-danger" th:if="${#fields.hasErrors('itemName')}"
+                  th:errors="*{itemName}"></span><br/><br/>
+
+            Price : <input type="text" th:field="*{price}" />
+            <span class="text-danger" th:if="${#fields.hasErrors('price')}"
+                  th:errors="*{price}"></span><br />
+
+            Description :<textarea placeholder="Enter description" rows="3"
+                                   th:field="*{description}" />
+            <span class="text-danger" th:if="${#fields.hasErrors('description')}"
+                  th:errors="*{description}"></span><br/>
+
+            <section>
+                <input type="file" name="file" /><br/><br/>
+            </section>
+
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+
+    </div>
+</div>
+
+<footer th:replace="base :: footer"></footer>
+</body>
+</html>
