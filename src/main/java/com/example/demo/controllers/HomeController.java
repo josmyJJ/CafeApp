@@ -81,6 +81,7 @@ public class HomeController {
       return "cafeform";
     }
     cafe.setUser(getUser());
+    
     if(file.isEmpty()){
       return "redirect:/add";
     }try {
@@ -92,8 +93,6 @@ public class HomeController {
       e.printStackTrace();
       return "redirect:/add";
     }
-
-//    cafeRepository.save(cafe);
     return "redirect:/";
   }
 

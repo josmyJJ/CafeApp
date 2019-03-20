@@ -12,8 +12,8 @@
         <span sec:authentication="principal.authorities">[USER, ADMIN]
         </span><br/><br/>
     </div>
-    <h1>Star Cafe</h1>
-    <h2>Please take a look at our menu</h2>
+    <h1 class="text-center text-warning py-4 display-3">Star Cafe</h1>
+    <h2 class="py-2">Please take a look at our menu</h2>
     <div class="my-4 py-5" align="center">
         <table class="table">
             <!--<h2>Insecure Page</h2>-->
@@ -32,7 +32,7 @@
                 <td class="pr-3" th:text="${cafe.description}"></td>
 
                 <td class="pr-3"  th:if="${cafe.image} != null">
-                    <img class=" daycare-img" style="width: 100px;"
+                    <img style="width: 100px;"
                          th:src="${cafe.image}">
                     </section></td>
 
